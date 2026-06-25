@@ -21,6 +21,13 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     operationsSorter: method
+    tagsSorter: alpha
+    filter: true
+    display-request-duration: true
+    default-models-expand-depth: -1
+    syntax-highlight:
+      theme: monokai
+    custom-css-url: /custom-swagger.css
 
 absence:
   threshold: ${ABSENCE_THRESHOLD:33}

@@ -18,7 +18,7 @@ Built with Spring Boot 3, PostgreSQL, and Docker Compose.
 |------|----------------|
 | Docker Desktop | 24.x |
 | Docker Compose | v2 (bundled with Docker Desktop) |
-| curl | any recent version (for the examples below) |
+| curl | any recent version |
 
 Note!: No local JDK or Maven installation is needed — the Dockerfile handles the build inside a container.
 
@@ -133,8 +133,7 @@ curl -s -X POST http://localhost:8080/api/students \
     "email": "theogoug@dummymail.gr",
     "studentNumber": "S2024001",
     "enrollmentDate": "2026-04-01"
-  }' | jq .
-```
+  }'```
 
 **What it does:** Persists a `Student` row and returns the full student object with the generated `id`. The `email` and `studentNumber` fields are unique - a 409 error is returned if either already exists.
 
@@ -145,8 +144,7 @@ curl -s -X POST http://localhost:8080/api/students \
 Retrieves every student currently in the database.
 
 ```bash
-curl -s http://localhost:8080/api/students | jq .
-```
+curl -s http://localhost:8080/api/students```
 
 **What it does:** Returns an array of `StudentResponse` objects. Use the `id` values from this response in subsequent enrollment and absence calls.
 
@@ -163,8 +161,7 @@ curl -s -X POST http://localhost:8080/api/absences \
     "enrollmentId": 1,
     "sessionId": 1,
     "status": "ABSENT"
-  }' | jq .
-```
+  }'```
 
 **What it does:** Creates an `Absence` record linking an enrollment to a session. The combination of `enrollmentId` + `sessionId` is unique, so the same session cannot be recorded twice for the same student. Returns the `AbsenceResponse` including the new absence `id`.
 
@@ -180,8 +177,7 @@ curl -s -X PATCH http://localhost:8080/api/absences/1/justify \
   -d '{
     "justified": true,
     "justification": "Medical certificate submitted on 2024-10-05"
-  }' | jq .
-```
+  }'```
 
 **What it does:** Sets `justified = true` and stores the free-text `justification` string on the absence row identified by `1`. Justified absences are excluded from the at-risk threshold calculation. Pass `"justified": false` to revoke a justification.
 
@@ -192,8 +188,7 @@ curl -s -X PATCH http://localhost:8080/api/absences/1/justify \
 Returns a breakdown of attended vs. absent sessions and the calculated absence rate.
 
 ```bash
-curl -s "http://localhost:8080/api/reports/summary?studentId=1&moduleId=1" | jq .
-```
+curl -s "http://localhost:8080/api/reports/summary?studentId=1&moduleId=1"```
 
 **What it does:** Queries all sessions for the module, counts the student's attendance records, and returns an `AbsenceSummaryResponse` containing `totalSessions`, `attended`, `absent`, `justifiedAbsences`, and `absenceRate` (as a percentage). Useful for end-of-semester progress checks.
 
@@ -204,8 +199,7 @@ curl -s "http://localhost:8080/api/reports/summary?studentId=1&moduleId=1" | jq 
 Lists every student whose absence rate exceeds the configured threshold (`ABSENCE_THRESHOLD` in `.env`).
 
 ```bash
-curl -s "http://localhost:8080/api/reports/at-risk?moduleId=1" | jq .
-```
+curl -s "http://localhost:8080/api/reports/at-risk?moduleId=1"```
 
 **What it does:** For a given module, calculates each enrolled student's absence rate and returns only those at or above the threshold (default 33%). The response includes `studentId`, `studentName`, and the computed `absenceRate`, enabling instructors to intervene before the end of the semester.
 
@@ -222,8 +216,3 @@ curl -s -X DELETE http://localhost:8080/api/students/1 \
 
 **What it does:** Issues a `DELETE` against the student row with `id = 1`. Returns `204 No Content` on success, `404` if the student does not exist.
 
----
-
-### Tip: pretty-print without `jq`
-
-If `jq` is not installed, append `| python -m json.tool` to any command above.
