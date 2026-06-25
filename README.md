@@ -27,19 +27,19 @@ Note!: No local JDK or Maven installation is needed — the Dockerfile handles t
 Open a terminal and then:
 
 1. **Clone the repository**
-```bash
+   ```bash
    git clone <repo-url>
    cd absence-management
-```
+   ```
 3. **Review (and optionally edit) the environment file**
 
    The `.env` file at the project root controls all runtime configuration. Defaults work out of the box
    see [Environment Variables](#environment-variables) for details.
 
 4. **Build and start all services**
-```bash
+   ```bash
    docker compose up --build -d
-```
+   ```
    This starts the three containers:
    - **db** — PostgreSQL 15, initialised automatically from `db/init/`
    - **app** — The Spring Boot API, available at `http://localhost:8080`
