@@ -27,23 +27,25 @@ Note!: No local JDK or Maven installation is needed — the Dockerfile handles t
 Open a terminal and then:
 
 1. **Clone the repository**
+```bash
    git clone <repo-url>
    cd absence-management
-
-2. **Review (and optionally edit) the environment file**
+```
+3. **Review (and optionally edit) the environment file**
 
    The `.env` file at the project root controls all runtime configuration. Defaults work out of the box
    see [Environment Variables](#environment-variables) for details.
 
-3. **Build and start all services**
+4. **Build and start all services**
+```bash
    docker compose up --build -d
-
+```
    This starts the three containers:
    - **db** — PostgreSQL 15, initialised automatically from `db/init/`
    - **app** — The Spring Boot API, available at `http://localhost:8080`
    - **pgadmin** — pgAdmin 4 UI, available at `http://localhost:5050`
 
-4. **Verify the API is up**
+6. **Verify the API is up**
 
    ```bash
    curl -s http://localhost:8080/api/students | head -c 200
@@ -51,7 +53,7 @@ Open a terminal and then:
 
    You should receive a JSON array (possibly empty if no student exists).
 
-5. **Browse the interactive API docs**
+7. **Browse the interactive API docs**
 
    Open `http://localhost:8080/swagger-ui.html` in a browser.
 
