@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 90" width="420" height="90">
+  <style>
+    .bg { fill: #0d1117; rx: 10; }
+    text { font-family: monospace; fill: #58a6ff; }
+    .label { font-size: 13px; fill: #8b949e; }
+    .tick { font-size: 15px; }
+
+    /* checkmarks appear one by one */
+    .c1 { opacity: 0; animation: pop 0.3s ease forwards; animation-delay: 0.4s; }
+    .c2 { opacity: 0; animation: pop 0.3s ease forwards; animation-delay: 1.0s; }
+    .c3 { opacity: 0; animation: pop 0.3s ease forwards; animation-delay: 1.6s; }
+    .c4 { opacity: 0; animation: pop 0.3s ease forwards; animation-delay: 2.2s; }
+    .c5 { opacity: 0; animation: pop 0.3s ease forwards; animation-delay: 2.8s; }
+
+    /* the absent X pulses in */
+    .absent { opacity: 0; fill: #f85149; font-size: 15px;
+              animation: pop 0.3s ease forwards; animation-delay: 3.4s; }
+
+    /* cursor blinks after all marks are placed */
+    .cursor { fill: #58a6ff; opacity: 0;
+              animation: blink 0.8s step-start infinite; animation-delay: 4s; }
+
+    @keyframes pop {
+      0%   { opacity: 0; transform: scale(0.5); }
+      60%  { opacity: 1; transform: scale(1.3); }
+      100% { opacity: 1; transform: scale(1.0); }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+  </style>
+
+  <!-- background card -->
+  <rect width="420" height="90" rx="10" fill="#0d1117"/>
+  <rect x="1" y="1" width="418" height="88" rx="9" fill="none" stroke="#30363d" stroke-width="1"/>
+
+  <!-- title -->
+  <text x="20" y="24" font-size="13px" fill="#58a6ff" font-family="monospace" font-weight="bold">📋 Taking attendance...</text>
+
+  <!-- student names -->
+  <text x="20" y="48" class="label">Theologia G.</text>
+  <text x="20" y="66" class="label">Pantelis P.</text>
+  <text x="20" y="84" class="label">Maria K.</text>
+
+  <text x="140" y="48" class="label">Nikos A.</text>
+  <text x="140" y="66" class="label">Elena M.</text>
+  <text x="140" y="84" class="label">Kostas D.</text>
+
+  <!-- checkmarks -->
+  <text x="122" y="50" class="tick c1" fill="#3fb950">✔</text>
+  <text x="122" y="68" class="tick c2" fill="#3fb950">✔</text>
+  <text x="122" y="86" class="tick c3" fill="#3fb950">✔</text>
+
+  <text x="242" y="50" class="tick c4" fill="#3fb950">✔</text>
+  <text x="242" y="68" class="tick c5" fill="#3fb950">✔</text>
+
+  <!-- one absent student -->
+  <text x="242" y="86" class="absent">✘</text>
+
+  <!-- blinking cursor -->
+  <rect x="262" y="73" width="8" height="13" rx="1" class="cursor"/>
+</svg>

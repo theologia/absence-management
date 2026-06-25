@@ -218,3 +218,7 @@ curl -s -X DELETE http://localhost:8080/api/students/1 \
 
 **What it does:** Issues a `DELETE` against the student row with `id = 1`. Returns `204 No Content` on success, `404` if the student does not exist.
 
+---
+
+![Taking attendance](./assets/attendance.svg)
+
