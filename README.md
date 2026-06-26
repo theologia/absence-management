@@ -6,7 +6,7 @@ Built with Spring Boot 3, PostgreSQL, and Docker Compose.
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [How to Start the Stack](#how-to-start-the-stack)
+- [How to Start](#how-to-start)
 - [How to Stop and Clean Up](#how-to-stop-and-clean-up)
 - [Environment Variables](#environment-variables)
 - [API Overview](#api-overview)
