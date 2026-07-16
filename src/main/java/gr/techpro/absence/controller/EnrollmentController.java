@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/enrollments")
 @RequiredArgsConstructor
@@ -29,6 +31,12 @@ public class EnrollmentController {
     @Operation(summary = "Get enrollment by ID")
     public ResponseEntity<EnrollmentResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(enrollmentService.getById(id));
+    }
+
+    @GetMapping
+    @Operation(summary = "List all enrollments")
+    public ResponseEntity<List<EnrollmentResponse>> getAll() {
+        return ResponseEntity.ok(enrollmentService.getAll());
     }
 
     @DeleteMapping("/{id}")

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @Transactional
@@ -44,6 +45,11 @@ public class EnrollmentService {
     @Transactional(readOnly = true)
     public EnrollmentResponse getById(Long id) {
         return toResponse(findById(id));
+    }
+
+    @Transactional(readOnly = true)
+    public List<EnrollmentResponse> getAll() {
+        return enrollmentRepository.findAll().stream().map(this::toResponse).toList();
     }
 
     public void drop(Long id) {
