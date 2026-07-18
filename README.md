@@ -28,7 +28,7 @@ Open a terminal and then:
 
 1. **Clone the repository**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/theologia/absence-management.git
    cd absence-management
    ```
 3. **Review (and optionally edit) the environment file**
