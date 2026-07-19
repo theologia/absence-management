@@ -2,6 +2,7 @@ package gr.techpro.absence.exception;
 
 import gr.techpro.absence.dto.response.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -28,6 +29,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AbsenceConflictException.class)
     public ResponseEntity<ErrorResponse> handleAbsenceConflict(AbsenceConflictException ex, HttpServletRequest req) {
         return build(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage(), req.getRequestURI());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolation(DataIntegrityViolationException ex, HttpServletRequest req) {
+        return build(HttpStatus.CONFLICT, "The request conflicts with existing data (e.g. a duplicate value for a field that must be unique)", req.getRequestURI());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
