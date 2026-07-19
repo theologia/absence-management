@@ -2,6 +2,7 @@ package gr.techpro.absence.controller;
 
 import gr.techpro.absence.dto.request.AssignInstructorRequest;
 import gr.techpro.absence.dto.request.ModuleRequest;
+import gr.techpro.absence.dto.response.ModuleInstructorResponse;
 import gr.techpro.absence.dto.response.ModuleResponse;
 import gr.techpro.absence.service.ModuleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,6 +60,12 @@ public class ModuleController {
                                                   @Valid @RequestBody AssignInstructorRequest req) {
         moduleService.assignInstructor(id, req);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/instructors")
+    @Operation(summary = "List instructors assigned to a module")
+    public ResponseEntity<List<ModuleInstructorResponse>> getInstructors(@PathVariable Long id) {
+        return ResponseEntity.ok(moduleService.getInstructors(id));
     }
 
     @DeleteMapping("/{id}/instructors/{instructorId}")

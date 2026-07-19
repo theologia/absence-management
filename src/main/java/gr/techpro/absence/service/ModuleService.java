@@ -2,6 +2,7 @@ package gr.techpro.absence.service;
 
 import gr.techpro.absence.dto.request.AssignInstructorRequest;
 import gr.techpro.absence.dto.request.ModuleRequest;
+import gr.techpro.absence.dto.response.ModuleInstructorResponse;
 import gr.techpro.absence.dto.response.ModuleResponse;
 import gr.techpro.absence.entity.Module;
 import gr.techpro.absence.entity.ModuleInstructor;
@@ -73,6 +74,20 @@ public class ModuleService {
                                 .role(req.getRole())
                                 .build())
                 );
+    }
+
+    @Transactional(readOnly = true)
+    public List<ModuleInstructorResponse> getInstructors(Long moduleId) {
+        findById(moduleId);
+        return moduleInstructorRepository.findByModuleId(moduleId).stream()
+                .map(mi -> ModuleInstructorResponse.builder()
+                        .instructorId(mi.getInstructor().getId())
+                        .firstName(mi.getInstructor().getFirstName())
+                        .lastName(mi.getInstructor().getLastName())
+                        .email(mi.getInstructor().getEmail())
+                        .role(mi.getRole())
+                        .build())
+                .toList();
     }
 
     public void removeInstructor(Long moduleId, Long instructorId) {
