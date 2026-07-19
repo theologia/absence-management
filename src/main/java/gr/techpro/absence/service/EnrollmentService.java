@@ -53,7 +53,9 @@ public class EnrollmentService {
     }
 
     public void drop(Long id) {
-        enrollmentRepository.delete(findById(id));
+        Enrollment enrollment = findById(id);
+        enrollment.setStatus(EnrollmentStatus.DROPPED);
+        enrollmentRepository.save(enrollment);
     }
 
     public Enrollment findById(Long id) {
